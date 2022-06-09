@@ -1,0 +1,51 @@
+<div class="card card-default">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr class="text-center">
+          <th *ngFor="let head of header">
+            <div *ngIf="head === 'id'">
+              <a (click)="sort()" style="cursor: pointer">{{head}}</a>
+            </div>
+            <div *ngIf="head !== 'id'">
+              <span> {{head}}</span>
+            </div>
+          </th>
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr *ngFor='let item of items' style="cursor: pointer; text-align: center"
+            (click)="showModal(item)"
+            data-toggle="modal"
+            data-target="#exampleModal">
+          <td *ngFor='let head of header'>
+            {{item[head]}}
+          </td>
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #modalForm="bs-modal" tabindex="-1" role="dialog" aria-hidden="true" (onShow)="show()">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">
+          Item Details:
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+          <span aria-hidden="true"><i class="fa fa-times"></i> </span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{selectedItem |json}}
+      </div>
+    </div>
+  </div>
+</div>
+
